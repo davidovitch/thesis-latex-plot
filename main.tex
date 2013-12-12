@@ -1,0 +1,200 @@
+\documentclass[11pt,a4paper,UKenglish]{memoir}
+%\documentclass[a4paper,12pt]{article}
+
+% output LaTeX packages and versions to the log file
+\listfiles
+
+%\usepackage{syntonly}
+%\syntaxonly
+
+% determine text width and height of the document with
+% \textwidth and \textheight
+% For memoir \textwidth  is 369.0pt which is also 5.10686in and 129.68715mm.
+% For memoir \textheight is 209.39738mm which is also 8.2457in.
+
+% usage of utf8 is strongly recommended if you have Danish or other fancy
+% characters in your text: ø æ å etc. All files used (including bibtex) must
+% have the same encoding!
+\usepackage[utf8]{inputenc} % Must correspond to the input encoding used by the editor
+
+\usepackage{babel} % Other languages, in this case UKenglish
+
+\usepackage{lmodern} % vector based Computer Modern font
+%\usepackage{bookman} % other example font
+\usepackage{textcomp} % for some more symbols: quote ('), degree () (clash with Hansen Chapter style due to other font used there)
+%\usepackage{gensymb} % degree symbol, but no quotes
+\usepackage{printlen}
+
+
+% to control how citations look like with the default cite environment
+% and some settings for the cite command
+%\bibpunct{(}{)}{,}{a}{,}{,}
+%\newcommand{\BibTeX}{{\sc Bib}\TeX}
+
+\usepackage{amssymb,amsmath} % mathematical symbols
+%\usepackage{mathtools} % tweaks to the amsmath package
+\usepackage{eurosym} % inlcude support for the euro symbol
+\usepackage{multirow} % multi column and row for tables
+
+% syntax highlighting with pygments
+\usepackage{minted}
+% nomenclature
+\usepackage{nomencl}
+
+% change orientation of specific page to landscape
+\usepackage{lscape}
+
+% -----------------------------------------------------------------
+% LaTeX option
+% -----------------------------------------------------------------
+\usepackage{graphicx, xcolor, psfrag} % for graphics
+% psfrag for replacing text in figures with the correct font size
+\graphicspath{{./figures/}} % path to figures and images
+% set as LAST package
+% active links, bookmarks, but  make sure to select the correct
+% driver, hypertex and dvips didn't work!
+% for more options, check here: https://en.wikibooks.org/wiki/LaTeX/Hyperlinks
+% https://www.tug.org/applications/hyperref/manual.html#x1-120003.8
+\definecolor{dark-red}{rgb}{0.4,0.15,0.15}
+\definecolor{dark-blue}{rgb}{0.15,0.15,0.4}
+\definecolor{medium-blue}{rgb}{0,0,0.5}
+% the defined colors and options for no box and colors is based on
+% stackoverflow answer available at
+% http://tex.stackexchange.com/questions/823/remove-ugly-borders-around-clickable-cross-references-and-hyperlinks
+\usepackage[dvipdfm,bookmarks=true]{hyperref}
+\hypersetup{
+  pdfauthor={David R.S. Verelst},
+  pdftitle={Numerical and Experimental Results of a Passive Free Yawing Downwind Wind Turbine},
+  pdfsubject={Numerical and Experimental Results of a Passive Free Yawing Downwind Wind Turbine},
+  colorlinks, linkcolor={dark-red},
+  citecolor={dark-blue}, urlcolor={medium-blue}
+}
+% default depth seems to be 3, but I can't find a reference to this tocdepth in
+% the manual.
+% http://tex.stackexchange.com/questions/52576/difference-between-bookmark-levels-greater-than-one-what-does-this-mean
+\setcounter{tocdepth}{4}
+\usepackage{memhfixc}% fixes for hyperref
+
+% -----------------------------------------------------------------
+% pdfLatex option
+% -----------------------------------------------------------------
+% pdfLatex gets the bookmarks correct automatically
+%\usepackage[pdftex]{graphicx}
+%\graphicspath{{./figures/}} % path to figures and images
+%\usepackage[pdftex,bookmarks=true]{hyperref}
+% -----------------------------------------------------------------
+
+% Texlive is updated and (sub)caption is now compatible with the memoir class
+\usepackage{caption}
+\usepackage{subcaption}
+
+% note that to use natbib you should either use citet or citep
+% http://merkel.zoneo.net/Latex/natbib.php
+%\usepackage{natbib}
+% numbered references
+\usepackage[sort&compress,numbers]{natbib}
+% to get sort&compress to work when natbib and hyperref are combined
+\usepackage{hypernat}
+
+% memoir way for subfigures. Switch to subcaption after update to 3.3?
+% You need a newsubfloat element to use subcaption
+%\newsubfloat{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% BEGIN LAYOUT SECTION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% no indentation at the beginning of paragraphs
+% 2 lines seprate every 
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2ex}
+
+% control spacing for the itemize environments
+% http://www.ctan.org/tex-archive/macros/latex/contrib/enumitem
+% http://www.tkcs-collins.com/truman/latex/list_examp.shtml
+\usepackage{enumitem}
+\setlist{nolistsep}
+% \setlength{\partopsep}{2ex} % not sure how this should do anything
+
+% FANCY CHAPTERS
+%Options: Sonny, Lenny, Glenn, Conny, Rejne, Bjarne, Bjornstrup
+%\usepackage[Bjornstrup]{fncychap}
+%\include{chapter_memoir_hansen_outlineleft}
+%\chapterstyle{pedersen}
+\chapterstyle{veelo}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CUSTOM ENVIRONMENTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% and a nice environment for the python code blocks (note minted
+% doesn't work with newenvironment)
+\definecolor{bg}{rgb}{0.95,0.95,0.95}
+\newcommand{\codesize}{\fontsize{9}{9}\selectfont}
+% for the font size of the code blocks we need something that will
+% just fit the 80 character length on the pagewidth
+\newminted[python]{python}{mathescape, bgcolor=bg, linenos=true, tabsize=4, fontsize=\codesize}
+
+
+% The following can be used if not using custom frontpage
+\title{Non-linear Quad Inverted Triangles with Newton-Einstein Conversions}
+\author{Janie Janssens}
+\date{\today}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% END 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% Only compile those files you are working in (shorter compile time)
+%\includeonly{ch_modelling_hawc2} 
+
+\begin{document}
+
+% switch on roman page numbering: I, II, III, etc
+\frontmatter
+
+%\maketitle  % use this if not using custom frontpage
+\include{frontpage}
+
+\include{back_cover}
+
+\newpage
+\include{abstract}
+\include{abstract_dk}
+
+\include{acknowledgements}
+
+\newpage
+\tableofcontents
+
+\newpage
+\listoffigures
+
+\newpage
+\listoftables
+
+\newpage
+\makenomenclature
+\printnomenclature
+
+% back to arabic page numbering (1,2,3,etc)
+\mainmatter
+%\include{preface}
+
+% CHAPTERS
+
+\include{ch_intro}
+\include{ch_the_world_isflat}
+\include{ch_triangles}
+\include{ch_conclusions}
+
+% include a bib file
+\include{biblio/bib}
+
+\include{appendix-code}
+
+\backmatter % for glossary, index, back page
+\end{document}
+
