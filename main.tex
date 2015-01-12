@@ -100,6 +100,24 @@
 % You need a newsubfloat element to use subcaption
 %\newsubfloat{figure}
 
+% -----------------------------------------------------------------
+% Auto count pages, references, etc for the back-cover
+% -----------------------------------------------------------------
+\usepackage{totcount}
+\newtotcounter{citnum} % Citations
+\def\oldbibitem{} \let\oldbibitem=\bibitem
+\def\bibitem{\stepcounter{citnum}\oldbibitem}
+
+\newtotcounter{fignum} % Figures
+\def\oldfigure{} \let\oldfigure=\figure
+\def\figure{\stepcounter{fignum}\oldfigure}
+
+\newtotcounter{tablenum} % Tables
+\def\oldtable{} \let\oldtable=\table
+\def\table{\stepcounter{tablenum}\oldtable}
+
+\regtotcounter{page} % Pages
+% -----------------------------------------------------------------
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % BEGIN LAYOUT SECTION
